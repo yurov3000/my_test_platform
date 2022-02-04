@@ -1,0 +1,43 @@
+{% extends "layout/basic.html" %}
+{% load thumbnail %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block title %}Профиль пользователя{% endblock %}
+
+{% block content %}
+{% if user.first_name and user.last_name %}
+<h5>Здравствуйте,<b> {{user.firs_name}} {{user.last_name}}</b>!</h5>
+{% else %}
+<p>Здравствуйте!</p>
+{% endif %}
+<h5>Ваши опубликованные тесты:</h5>
+
+<p><a href="{% url 'main:profile_bb_add' %}">Добавить тест</a></p>
+
+<ul class="list-unstyled">
+    {% for bb in bbs %}
+        <li class="media my-5 p-3 border">
+            {% url 'main:detail' rubric_pk=bb.rubric.pk pk=bb.pk as url %}<!--создаем ссылку и помещаем ее в переменную-->
+            <a href="{{url}}"><!--используем эту переменную-->
+            {% if bb.image %}
+            <img class="main-image" src="{{ bb.image.url }}" >
+            {% else %}
+            <img class="main-image" src="{% static 'main/empty.jpg' %}">
+            {% endif %}
+            </a>
+
+            <div class="media-body ml-2">
+                <h3><a href="{{url}}">{{bb.title}}</a></h3>
+                <p class="text right mt-2">
+                    <a href="{% url 'main:profile_bb_change' pk=bb.pk %}">Исправить  </a>
+                    <a href="{% url 'main:profile_bb_delete' pk=bb.pk %}">Удалить  </a>
+                </p>
+                <div>{{bb.content}}</div>
+                <p class="text-right font-italic">{{bb.created_at}}</p>
+            </div>
+        </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

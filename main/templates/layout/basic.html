@@ -1,0 +1,69 @@
+{% load bootstrap4 %}
+{% load static %}
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+    <title>{% block title %}Главная{% endblock %} - Практик.ru</title>
+    {% bootstrap_css %}
+
+    <link rel="stylesheet" href="{% static 'main/style.css' %}">
+    {% bootstrap_javascript jquery='slim' %}
+</head>
+
+<body class="container-lfuid">
+    <header class="mb-4">
+        <h4 class="display-7 text-center">Готов к труду?</h4>
+        <h2 class="display-3 text-center">Практик.ru</h2>
+    </header>
+    <div class="row">
+        <ul class="col nav justify-content-end border">
+            {% if user.is_authenticated %}
+            <li class="nav-item dropdown"> 
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="{% url 'main:profile' %}"
+                role="button" aria-haspopup="true" aria-expanded="false">Профиль</a>
+                
+                <div class="dropdown-menu">
+                    <a href="{% url 'main:profile' %}" class="dropdown-item">Мои тесты</a>
+                    <a href="{% url 'main:profile_change' %}" class="dropdown-item">Изменить личные данные</a>
+                    <a href="{% url 'main:password_change' %}" class="dropdown-item">Изменить пароль</a>
+                    <div class="dropdown-driver"></div>
+                    <a href="{% url 'main:logout' %}" class="dropdown-item">Выйти</a>
+                    <div class="dropdown-driver"></div>
+                    <a href="{% url 'main:profile_delete' %}" class="dropdown-item">Удалить</a>
+                </div>
+            </li>
+            {% else %}
+            <li class="nav-item"><a class="nav-link" href="{% url 'main:login' %}">Вход</a></li>
+            {% endif %}
+        </ul>
+        <a href="{% url 'main:index' %}" class="nav-link root">Главная</a>
+        <a class="nav-link root mr-4" href="{% url 'main:other' page='about' %}">О сайте</a>
+    </div>
+
+    <div class="row">
+        <nav class="col-md-auto nav flex-column border">
+            <span class="nav-link root font-weight-bold">Категории</span>
+            {% for rubric in rubrics %}
+            <a class="nav-link" href="{% url 'main:by_rubric' pk=rubric.pk%}">{{rubric.super_rubric.name}}</a>
+            {% endfor %}
+            <a href="{% url 'main:books' %}" class="nav-link">Обучающие материалы</a>
+        </nav>
+
+        <section class="col border py-2">
+            {% bootstrap_messages %}
+            {% block content %}
+            {% endblock %}
+        </section>
+
+    </div>
+
+    <footer class="mt-3">
+        <p class="text-right font-italic">&copy; YUROV3000</p>
+    </footer>
+
+</body>
+</html>

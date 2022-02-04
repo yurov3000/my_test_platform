@@ -1,0 +1,52 @@
+{% extends "layout/basic.html" %}
+{% load thumbnail %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block title %}{{bb.title}} - {{bb.rubric.name}}{% endblock %}
+
+{% block content %}
+<div class="container-fluid mt-3">
+    <div class="row">
+        {% if bb.image %}
+        <div class="col-md-auto"><img src="{{ bb.image.url }}" class="main-image"></div>
+        {% endif %}
+        <div class="col">
+
+            <div class="test-block">
+                <div class="asks">{{test.ask_test_1}}</div>
+                <div class="answer"><input name="answer"></div>
+
+                <div class="asks">{{test.ask_test_2}}</div>
+                <div class="answer"><input name="answer"></div>
+
+                <div class="asks">{{test.ask_test_3}}</div>
+                <div class="answer"><input name="answer"></div>
+
+                <div class="asks">{{test.ask_test_4}}</div>
+                <div class="answer"><input name="answer"></div>
+
+                <div class="asks">{{test.ask_test_5}}</div>
+                <div class="answer"><input name="answer"></div>
+
+                <div class="asks">{{test.ask_test_6}}</div>
+                <div class="answer"><input name="answer"></div>
+
+                <div class="asks">{{test.ask_test_7}}</div>
+                <div class="answer"><input name="answer"></div>
+
+                <div class="asks">{{test.ask_test_8}}</div>
+                <div class="answer"><input name="answer"></div>
+
+                <div class="asks">{{test.ask_test_9}}</div>
+                <div class="answer"><input name="answer"></div>
+
+                <div class="asks">{{test.ask_test_10}}</div>
+                <div class="answer"><input name="answer"></div>
+            </div>
+            <p class="text-right font-italic">Добавлено {{bb.created_at}}</p>
+        </div>
+    </div>
+</div>
+<p><a href="{% url 'main:by_rubric' pk=bb.rubric.pk %}{{all}}">Назад</a></p>
+{% endblock %}

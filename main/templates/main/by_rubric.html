@@ -1,0 +1,47 @@
+{% extends "layout/basic.html" %}
+
+{% load thumbnail %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block title %}{{rubric}}{% endblock %}
+
+{% block content %}
+<h2 class="mb-2">{{rubric}}</h2>
+
+<!--Выводим форму поиска, прижав ее к правой части страницы-->
+<div class="container-fluid mb-2">
+    <div class="row">
+        <div class="col">&nbsp;</div>
+        <form class="col-md-auto form-inline">
+            {% bootstrap_form form show_label=False %}
+            {% bootstrap_button content="Искать" button_type="submit" %}
+        </form>
+    </div>
+</div>
+
+{% if bbs %}
+<ul class="list-unstyled">
+    {% for bb in bbs %}
+    <li class="media my-5 p-3 border">
+        {% url 'main:detail' rubric_pk=bb.rubric.pk pk=bb.pk as url %}<!--создаем ссылку и помещаем ее в переменную-->
+        <a href="{{url}}"><!--используем эту переменную-->
+        {% if bb.image %}
+        <img class="main-image" src="{{ bb.image.url }}" >
+        {% else %}
+        <img class="main-image" src="{% static 'main/empty.jpg' %}">
+        {% endif %}
+        </a>
+
+        <div class="media-body ml-2">
+            <h3><a href="{{url}}">{{bb.title}}</a></h3>
+            <div>{{bb.content}}</div>
+            <p class="text-right font-italic">{{bb.created_at}}</p>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+
+{% bootstrap_pagination page url=keyword %} <!--тег шаблонизатора, создающий пагинатор-->
+{% endif %}
+{% endblock %}

@@ -1,0 +1,23 @@
+body{
+    background-color: #F7F6E7;
+}
+header{
+    background-color:#E7E6E1;
+}
+.root{
+    font-size: larger;
+}
+footer {
+    background-color: #537791;
+    height: 150px;
+    color: #E4EFE7;
+}
+.row{
+    background-color: #C1C0B9;
+}
+img.main-image{
+    width: 230px;
+}
+img.additional-image{
+    width: 180px;
+}

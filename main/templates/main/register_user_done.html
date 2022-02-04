@@ -1,0 +1,10 @@
+{% extends "layout/basic.html" %}
+
+{% load bootstrap4 %}
+
+{% block title %}Регистрация завершена{% endblock %}
+
+{% block content %}
+<h2>Регистрация нового пользователя завершена</h2>
+<a href="{% url 'main:profile' %}" role="button" aria-haspopup="true" aria-expanded="false">Перейти в свой профиль</a>
+{% endblock %}

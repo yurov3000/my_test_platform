@@ -1,0 +1,22 @@
+{% extends "layout/basic.html" %}
+
+{% load bootstrap4 %}
+
+{% block title %}Вход{% endblock %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<p>Вы уже выполняли вход.</p>
+{% else %}
+<form method="post">
+    {% csrf_token %}
+    {% bootstrap_form form layout='horizontal' %}
+    <input type="hidden" name="next" value="{{ next }}">
+    {% buttons submit='Войти' %}{% endbuttons %}
+</form>
+<p> <a href="{% url 'main:register' %}" class="nav-link">Регистрация</a> </p> 
+<p><a href="{% url 'main:password_reset' %}" class="nav-link">Сброс пароля</a></p>
+{% endif %}
+
+{% endblock %}

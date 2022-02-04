@@ -1,0 +1,53 @@
+{% extends "layout/basic.html" %}
+{% load bootstrap4 %}
+
+{% block title %}{{bb.title}} - {{bb.rubric.name}}{% endblock %}
+
+{% block content %}
+<div class="container-fluid mt-3">
+    <div class="row">
+        {% if bb.image %}
+        <div class="col-md-auto"><img src="{{ bb.image.url }}" class="main-image"></div>
+        {% endif %}
+        <div class="col">
+            <form method="post" enctype="multipart/form-data">
+                {%csrf_token%}
+            <div class="test-block mb-3">
+                <div class="asks mb-2 mt-2">{{test.ask_test_1}}</div>
+                <div class="answer" id="an-1">{{answer_form.answer_form_1}}</div> 
+
+                <div class="asks mb-2 mt-2">{{test.ask_test_2}}</div>
+                <div class="answer" id="an-2">{{answer_form.answer_form_2}}</div>
+
+                <div class="asks mb-2 mt-2">{{test.ask_test_3}}</div>
+                <div class="answer" id="an-3">{{answer_form.answer_form_3}}</div>
+
+                <div class="asks mb-2 mt-2">{{test.ask_test_4}}</div>
+                <div class="answer" id="an-4">{{answer_form.answer_form_4}}</div>
+
+                <div class="asks mb-2 mt-2">{{test.ask_test_5}}</div>
+                <div class="answer" id="an-5">{{answer_form.answer_form_5}}</div>
+
+                <div class="asks mb-2 mt-2">{{test.ask_test_6}}</div>
+                <div class="answer" id="an-6">{{answer_form.answer_form_6}}</div>
+
+                <div class="asks mb-2 mt-2">{{test.ask_test_7}}</div>
+                <div class="answer" id="an-7">{{answer_form.answer_form_7}}</div>
+
+                <div class="asks mb-2 mt-2">{{test.ask_test_8}}</div>
+                <div class="answer" id="an-8">{{answer_form.answer_form_8}}</div>
+
+                <div class="asks mb-2 mt-2">{{test.ask_test_9}}</div>
+                <div class="answer" id="an-9">{{answer_form.answer_form_9}}</div>
+
+                <div class="asks mb-2 mt-2">{{test.ask_test_10}}</div>
+                <div class="answer" id="an-10">{{answer_form.answer_form_10}}</div>
+            </div>
+            {%buttons submit='Отправить ответы' method='post'%}{%endbuttons%}
+            </form>
+            <p class="text-right font-italic">Добавлено {{bb.created_at}}</p>
+        </div>
+    </div>
+</div>
+<p><a href="{% url 'main:by_rubric' pk=bb.rubric.pk %}{{all}}">Назад</a></p>
+{% endblock %}
